@@ -40,6 +40,31 @@ let port = process.env.PORT || 8010;
 // les routes
 const prefix = '/api';
 
+// Route d'accueil
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'API Assignments - Bienvenue!', 
+    endpoints: {
+      assignments: '/api/assignments',
+      assignment: '/api/assignments/:id'
+    }
+  });
+});
+
+app.get(prefix, (req, res) => {
+  res.json({ 
+    message: 'API Assignments', 
+    version: '1.0.0',
+    endpoints: {
+      'GET /api/assignments': 'Récupérer tous les assignments',
+      'GET /api/assignments/:id': 'Récupérer un assignment par ID',
+      'POST /api/assignments': 'Créer un assignment',
+      'PUT /api/assignments': 'Mettre à jour un assignment',
+      'DELETE /api/assignments/:id': 'Supprimer un assignment'
+    }
+  });
+});
+
 app.route(prefix + '/assignments')
   .get(assignment.getAssignments);
 
